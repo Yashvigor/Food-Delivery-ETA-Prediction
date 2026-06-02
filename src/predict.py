@@ -6,6 +6,10 @@ import numpy as np
 import pandas as pd
 from typing import Dict, Any, Tuple
 
+# Add current directory (src/) to the module search paths to resolve sibling imports in Streamlit
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 # Import custom modules
 from feature_engineering import engineer_features
 import db_helper

@@ -14,7 +14,7 @@ By leveraging advanced machine learning regressions, probability classifiers, ex
 2.  **Explainable AI (SHAP)**:
     *   Unveils the model's inner reasoning using local SHAP contribution weights, showing exactly which features (like heavy traffic, storm conditions, or rider experience) added or subtracted minutes from a predicted delivery.
 3.  **Dynamic Database Logging**:
-    *   Connects to an enterprise **PostgreSQL** instance or falls back to a zero-config local **SQLite** database (`data/logistics.db`). All customer ETA queries, courier positions, and admin configurations are written and tracked in real-time.
+    *   Connects to an enterprise **PostgreSQL** instance or falls back to a zero-config local **SQLite** database (`data/logistics.db`). All customer ETA queries, courier positions, and admin configurations are written and tracked in real-time. 
 4.  **Live External API Integrations**:
     *   **Route Router**: Queries public **OSRM (OpenStreetMap) Driving API** to calculate real driving route distance and travel times, falling back to a Haversine geometric calculation if offline.
     *   **Live Weather**: Integrates with **OpenWeatherMap API** to fetch temperature, visibility, and rain severity live at coordinate endpoints.

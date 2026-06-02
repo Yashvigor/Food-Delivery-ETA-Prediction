@@ -10,6 +10,10 @@ import xgboost as xgb
 import lightgbm as lgb
 from catboost import CatBoostRegressor
 
+# Add current directory (src/) to the module search paths to resolve sibling imports when called from parent directories
+import sys
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 # Import custom modules
 from data_preprocessing import clean_and_process_file, get_preprocessor_pipeline
 from feature_engineering import engineer_features
