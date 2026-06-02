@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data and SQLite databases
+data/raw/deliveries.csv
+data/processed/processed_deliveries.csv
+data/external/weather_data.csv
+data/external/traffic_data.csv
+*.db
+*.sqlite
+
+# Model binaries and weights
+models/*.pkl
+models/*.joblib
+models/*.h5
+
+# Reports and plots
+reports/graphs/*
+reports/feature_importance/*
+reports/model_metrics/*
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Streamlit/IDE configs
+.streamlit/
+.idea/
+.vscode/
+.ipynb_checkpoints/
