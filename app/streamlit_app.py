@@ -254,6 +254,85 @@ st.markdown(
         header[data-testid="stHeader"] {
             background: transparent !important;
         }
+
+        /* New premium timeline and badge styles for dispatch log */
+        .timeline-card {
+            background: rgba(17, 24, 39, 0.45) !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            border-radius: 16px !important;
+            padding: 20px !important;
+            margin-bottom: 16px !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+        }
+        .timeline-card:hover {
+            transform: translateY(-2px) !important;
+            border-color: rgba(0, 242, 254, 0.25) !important;
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.08) !important;
+        }
+        .status-badge {
+            display: inline-flex !important;
+            align-items: center !important;
+            padding: 4px 12px !important;
+            border-radius: 50px !important;
+            font-size: 0.78rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            border: 1px solid transparent !important;
+        }
+        .status-preparing {
+            background: rgba(245, 158, 11, 0.1) !important;
+            color: #f59e0b !important;
+            border-color: rgba(245, 158, 11, 0.2) !important;
+        }
+        .status-transit {
+            background: rgba(6, 182, 212, 0.1) !important;
+            color: #06b6d4 !important;
+            border-color: rgba(6, 182, 212, 0.2) !important;
+        }
+        .status-delivered {
+            background: rgba(16, 185, 129, 0.1) !important;
+            color: #10b981 !important;
+            border-color: rgba(16, 185, 129, 0.2) !important;
+        }
+        .timeline-bar-bg {
+            background: rgba(255, 255, 255, 0.05) !important;
+            height: 6px !important;
+            border-radius: 3px !important;
+            margin-top: 12px !important;
+            overflow: hidden !important;
+            width: 100% !important;
+        }
+        .timeline-bar-fill {
+            height: 100% !important;
+            border-radius: 3px !important;
+            box-shadow: 0 0 8px rgba(0, 242, 254, 0.5) !important;
+            background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%) !important;
+        }
+        .live-indicator {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            font-weight: 700 !important;
+            color: #ef4444 !important;
+            font-size: 0.8rem !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+        }
+        .live-dot {
+            width: 8px !important;
+            height: 8px !important;
+            background-color: #ef4444 !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 8px #ef4444 !important;
+            animation: pulse-live 1.8s infinite ease-in-out !important;
+        }
+        @keyframes pulse-live {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px #ef4444; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
     </style>
     """,
     unsafe_allow_html=True
