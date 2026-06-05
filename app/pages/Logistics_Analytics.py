@@ -15,8 +15,19 @@ from app.components import charts
 render_sidebar()
 
 # Title
-st.markdown("<h1 style='color: #ffffff; margin-bottom: 20px; font-family: \"Outfit\";'>📈 Operations Logistics Analytics</h1>", unsafe_allow_html=True)
-st.write("Aggregated insights on delivery volumes, weather delays, traffic bottlenecks, and courier transit efficiencies.")
+st.markdown(
+    """
+    <div style="margin-bottom: 25px;">
+        <h1 style='color: #f8fafc; font-family: "Outfit"; font-size: 2.8rem; margin-bottom: 5px; text-shadow: 0 0 15px rgba(255, 107, 53, 0.15);'>
+            📈 Operations Logistics Analytics
+        </h1>
+        <p style='color: #94a3b8; font-size: 1.1rem; margin-top: 0;'>
+            Aggregated insights on delivery volumes, weather delays, traffic bottlenecks, and courier transit efficiencies.
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # Fetch DB data
 try:
@@ -35,11 +46,38 @@ else:
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("Total Operations Logged", len(df_orders))
+        st.markdown(
+            f"""
+            <div class="premium-card">
+                <div style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Total Operations Logged</div>
+                <div style="font-size: 2.3rem; font-weight: 800; color: #f8fafc; font-family: 'Outfit'; margin: 5px 0;">{len(df_orders)}</div>
+                <div style="font-size: 0.85rem; color: #10b981; font-weight: 600;">📊 In database log</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
     with col2:
-        st.metric("Average Fleet Speed", f"{avg_speed} km/h", help="Calculated as distance / actual transit time")
+        st.markdown(
+            f"""
+            <div class="premium-card">
+                <div style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Average Fleet Speed</div>
+                <div style="font-size: 2.3rem; font-weight: 800; color: #ff6b35; font-family: 'Outfit'; margin: 5px 0;">{avg_speed} <span style="font-size: 1.2rem; font-weight: 600;">km/h</span></div>
+                <div style="font-size: 0.85rem; color: #ff8a5c; font-weight: 500;">⚡ Speed = distance / transit</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
     with col3:
-        st.metric("Delivered Orders Rate", f"{len(delivered_orders)} / {len(df_orders)}")
+        st.markdown(
+            f"""
+            <div class="premium-card">
+                <div style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Delivered Orders Rate</div>
+                <div style="font-size: 2.3rem; font-weight: 800; color: #ff2b54; font-family: 'Outfit'; margin: 5px 0;">{len(delivered_orders)} <span style="font-size: 1.2rem; font-weight: 600;">/ {len(df_orders)}</span></div>
+                <div style="font-size: 0.85rem; color: #ff5273; font-weight: 600;">⏱️ SLA Complete Status</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
         
     st.write("---")
     
@@ -62,8 +100,8 @@ else:
 st.write("---")
 
 # Operations Simulation Console
-st.markdown("### 🎛️ Ops simulation console")
-st.write("Need more sample data to analyze? Use the simulator below to generate randomized historical delivery orders and stream them into the PostgreSQL/SQLite database.")
+st.markdown("### 🎛️ Simulation Console")
+st.write("Need more sample data to analyze? Use the simulator below to generate randomized historical delivery orders and save them to the database.")
 
 sim_col1, sim_col2 = st.columns([1, 2])
 
@@ -72,8 +110,8 @@ with sim_col1:
     
 with sim_col2:
     st.markdown("<div style='margin-top: 28px;'></div>", unsafe_allow_html=True)
-    if st.button("🚀 Stream Simulated Logistics Transactions"):
-        with st.spinner("Generating logistics profiles and committing to database..."):
+    if st.button("🚀 Generate Simulated Orders"):
+        with st.spinner("Creating orders and saving to database..."):
             try:
                 conn, db_type = db_helper.get_connection()
                 cur = conn.cursor()

@@ -18,11 +18,11 @@ render_sidebar()
 st.markdown(
     """
     <div style="margin-bottom: 25px;">
-        <h1 style='color: #ffffff; font-family: "Outfit"; font-size: 2.8rem; margin-bottom: 5px; text-shadow: 0 0 15px rgba(0, 242, 254, 0.2);'>
-            ⚡ Predictive Dispatch & ETA Engine
+        <h1 style='color: #f8fafc; font-family: "Outfit"; font-size: 2.8rem; margin-bottom: 5px; text-shadow: 0 0 15px rgba(0, 242, 254, 0.15);'>
+            ⚡ Delivery Travel Time Predictor
         </h1>
-        <p style='color: #a0aec0; font-size: 1.1rem; margin-top: 0;'>
-            Select delivery endpoints, fetch real-world traffic patterns, and execute high-fidelity machine learning evaluations.
+        <p style='color: #94a3b8; font-size: 1.1rem; margin-top: 0;'>
+            Pick a restaurant and customer location to predict how long the delivery will take.
         </p>
     </div>
     """,
@@ -39,14 +39,14 @@ except Exception as e:
     st.error(f"Failed to fetch database reference data: {e}")
 
 # MAIN WORKSPACE STRUCTURE
-st.markdown("### 🎛️ Configure Delivery Parameters")
-st.write("Complete the three operational setup steps below to query dispatch nodes and predict travel outcomes.")
+st.markdown("### 🎛️ Set Delivery Details")
+st.write("Fill in the details below to predict the delivery time.")
 
 # Create clean, modern tabs for parameter categories
 tab_geo, tab_fleet, tab_time = st.tabs([
-    "📍 Step 1: Geography & Weather", 
-    "🛵 Step 2: Courier & Vehicle Fleet", 
-    "📅 Step 3: Logistics & Timing Context"
+    "📍 Step 1: Location & Weather", 
+    "🛵 Step 2: Courier & Ride Type", 
+    "📅 Step 3: Time & Order Details"
 ])
 
 # Define default dictionary for inputs
@@ -55,15 +55,15 @@ if "payload" not in st.session_state:
 
 # --- TAB 1: GEOGRAPHY & WEATHER ---
 with tab_geo:
-    st.markdown("#### 🌍 Delivery Coordinate Endpoints & Routing API")
-    st.write("Compute exact city road networks and driving distances dynamically.")
+    st.markdown("#### 🌍 Locations & Route Details")
+    st.write("Choose endpoints and check driving route distances.")
     
     geo_col1, geo_col2 = st.columns(2)
     
     with geo_col1:
         if restaurants:
             rest_options = {r["name"]: r for r in restaurants}
-            selected_rest_name = st.selectbox("Select Dispatch Restaurant", list(rest_options.keys()))
+            selected_rest_name = st.selectbox("Select Restaurant", list(rest_options.keys()))
             selected_rest = rest_options[selected_rest_name]
             try:
                 rest_lat, rest_lon = map(float, selected_rest["location"].split(","))
@@ -76,8 +76,8 @@ with tab_geo:
             
         st.markdown(
             f"""
-            <div style="background: rgba(30, 41, 59, 0.35); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px 18px; margin-bottom: 15px;">
-                <span style="font-size: 0.8rem; color: #718096; text-transform: uppercase;">Restaurant Node Coords</span><br/>
+            <div style="background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; padding: 12px 18px; margin-bottom: 15px;">
+                <span style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; font-weight: 500;">Restaurant Node Coords</span><br/>
                 <span style="font-family: monospace; color: #00f2fe; font-weight: 600; font-size: 1.05rem;">{rest_lat:.5f}, {rest_lon:.5f}</span>
             </div>
             """,
@@ -85,7 +85,7 @@ with tab_geo:
         )
 
     with geo_col2:
-        st.markdown("<span style='font-size: 0.9rem; font-weight: 600; color: #ffffff;'>Customer Coordinate Offset</span>", unsafe_allow_html=True)
+        st.markdown("<span style='font-size: 0.9rem; font-weight: 600; color: #f1f5f9;'>Customer Coordinate Offset</span>", unsafe_allow_html=True)
         cust_offset_lat = st.slider("Latitude Offset (Delta)", -0.150, 0.150, 0.045, format="%.4f", key="lat_offset_slider")
         cust_offset_lon = st.slider("Longitude Offset (Delta)", -0.150, 0.150, -0.035, format="%.4f", key="lon_offset_slider")
         
@@ -94,8 +94,8 @@ with tab_geo:
         
         st.markdown(
             f"""
-            <div style="background: rgba(30, 41, 59, 0.35); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px 18px; margin-bottom: 15px;">
-                <span style="font-size: 0.8rem; color: #718096; text-transform: uppercase;">Customer Endpoint Coords</span><br/>
+            <div style="background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; padding: 12px 18px; margin-bottom: 15px;">
+                <span style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; font-weight: 500;">Customer Endpoint Coords</span><br/>
                 <span style="font-family: monospace; color: #a5b4fc; font-weight: 600; font-size: 1.05rem;">{cust_lat:.5f}, {cust_lon:.5f}</span>
             </div>
             """,
@@ -107,10 +107,10 @@ with tab_geo:
     route_col1, route_col2 = st.columns([1.2, 1])
     
     with route_col1:
-        st.markdown("**⚡ Live OSRM Route Navigation**")
-        st.write("Calculates real-world city road routes utilizing OpenStreetMap's route calculation nodes.")
+        st.markdown("**🗺️ Map Distance Calculator**")
+        st.write("Calculates the real driving distance using local road network mapping.")
         
-        if st.button("🗺️ Compute OSRM Driving Distance & Time"):
+        if st.button("🗺️ Calculate Road Distance"):
             with st.spinner("Streaming OSRM nodes..."):
                 distance, travel_time = utils.get_route_details(rest_lat, rest_lon, cust_lat, cust_lon)
                 st.session_state["osm_distance"] = distance
@@ -121,8 +121,8 @@ with tab_geo:
         distance_km = st.number_input("Final Route Distance (km)", min_value=0.1, max_value=50.0, value=default_distance, step=0.1)
 
     with route_col2:
-        st.markdown("**🌤️ Real-Time Environment Metrics**")
-        st.write("Fetches temperature, cloud matrices, and rain status dynamically via OpenWeatherMap APIs.")
+        st.markdown("**🌤️ Weather Conditions**")
+        st.write("Check the local temperature and weather at the restaurant location.")
         
         fetch_live = st.checkbox("Query weather live at Restaurant coordinates")
         
@@ -136,15 +136,15 @@ with tab_geo:
 
 # --- TAB 2: COURIER & FLEET LOGISTICS ---
 with tab_fleet:
-    st.markdown("#### 🛵 Dispatch Courier Profile & Vehicle Mode")
-    st.write("Analyze rider demographics and transit capabilities.")
+    st.markdown("#### 🛵 Courier Details")
+    st.write("View courier ratings and override rider vehicle modes.")
     
     fleet_col1, fleet_col2 = st.columns(2)
     
     with fleet_col1:
         if couriers:
             courier_options = {c["name"]: c for c in couriers}
-            selected_cour_name = st.selectbox("Select Active Dispatch Courier", list(courier_options.keys()))
+            selected_cour_name = st.selectbox("Select Courier", list(courier_options.keys()))
             selected_cour = courier_options[selected_cour_name]
         else:
             selected_cour_name = "Alex Mercer (Default)"
@@ -152,13 +152,13 @@ with tab_fleet:
             
         st.markdown(
             f"""
-            <div style="background: rgba(30, 41, 59, 0.45); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 20px;">
-                <h5 style="margin-top:0; color: #ffffff; font-family: 'Outfit';">🛵 Courier Information Card</h5>
-                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: #a0aec0;">
+            <div style="background: rgba(17, 24, 39, 0.5); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 16px; padding: 20px;">
+                <h5 style="margin-top:0; color: #f8fafc; font-family: 'Outfit';">🛵 Courier Details Card</h5>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: #cbd5e1;">
                     <div>• Name: <b style="color:#ffffff;">{selected_cour_name}</b></div>
-                    <div>• Registered Vehicle: <b style="color:#00f2fe;">{selected_cour.get('vehicle_type')}</b></div>
-                    <div>• Industry Experience: <b style="color:#ffffff;">{selected_cour.get('experience')} Years</b></div>
-                    <div>• Courier Quality Rating: <b style="color:#facc15;">★ {selected_cour.get('rating')} / 5.0</b></div>
+                    <div>• Vehicle Type: <b style="color:#00f2fe;">{selected_cour.get('vehicle_type')}</b></div>
+                    <div>• Courier Experience: <b style="color:#ffffff;">{selected_cour.get('experience')} Years</b></div>
+                    <div>• Rating: <b style="color:#facc15;">★ {selected_cour.get('rating')} / 5.0</b></div>
                 </div>
             </div>
             """,
@@ -167,34 +167,34 @@ with tab_fleet:
 
     with fleet_col2:
         vehicle_type = st.selectbox(
-            "Override Fleet Vehicle Mode", 
+            "Override Courier Ride Mode", 
             ["Bike", "Scooter", "Cycle"], 
             index=["Bike", "Scooter", "Cycle"].index(selected_cour.get("vehicle_type", "Scooter"))
         )
         courier_exp = st.slider("Override Courier Experience (Years)", 1, 15, int(selected_cour.get("experience", 5)))
-        courier_age = st.slider("Override Courier Rider Age", 18, 55, 27)
+        courier_age = st.slider("Override Courier Age", 18, 55, 27)
 
 # --- TAB 3: CONTEXT & TIMING ---
 with tab_time:
-    st.markdown("#### 📅 Operations Timeline & Order Context")
-    st.write("Quantify orders timing variables and restaurant preparation estimates.")
+    st.markdown("#### 📅 Time & Order Details")
+    st.write("Adjust prep times, traffic, and order details.")
     
     time_col1, time_col2 = st.columns(2)
     
     with time_col1:
         prep_time = st.slider("Restaurant Prep Time (Minutes)", 5, 60, 18, help="Expected time for kitchen food prep")
-        traffic_level = st.selectbox("Current City Traffic Level", ["Low", "Medium", "High", "Jam"])
-        time_of_day = st.selectbox("Dispatch Time of Day", ["Morning", "Afternoon", "Night"])
-        day_of_week = st.selectbox("Dispatch Day of Week", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
+        traffic_level = st.selectbox("Current Traffic Level", ["Low", "Medium", "High", "Jam"])
+        time_of_day = st.selectbox("Time of Day", ["Morning", "Afternoon", "Night"])
+        day_of_week = st.selectbox("Day of Week", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
         
     with time_col2:
-        is_peak = st.selectbox("Is Peak Hour?", ["Yes", "No"], index=1)
-        is_festival = st.selectbox("Festival Day?", ["Yes", "No"], index=1)
-        is_holiday = st.selectbox("Official Public Holiday?", ["Yes", "No"], index=1)
+        is_peak = st.selectbox("Peak Hours?", ["Yes", "No"], index=1)
+        is_festival = st.selectbox("Holiday or Festival?", ["Yes", "No"], index=1)
+        is_holiday = st.selectbox("Public Holiday?", ["Yes", "No"], index=1)
         
-        order_size = st.selectbox("Order Basket Size", ["Small", "Medium", "Large"], index=1)
-        location_type = st.selectbox("Handoff Destination Type", ["Residential", "Commercial"])
-        restaurant_rating = st.slider("Restaurant Standard Rating (Stars)", 1.0, 5.0, float(selected_rest.get("rating", 4.5)), step=0.1)
+        order_size = st.selectbox("Order Size", ["Small", "Medium", "Large"], index=1)
+        location_type = st.selectbox("Delivery Destination Type", ["Residential", "Commercial"])
+        restaurant_rating = st.slider("Restaurant Rating", 1.0, 5.0, float(selected_rest.get("rating", 4.5)), step=0.1)
 
 # Build parameter dictionary for execution
 payload = {
@@ -221,8 +221,8 @@ st.write("---")
 
 # Predict Button
 st.markdown("<div style='margin-bottom: 25px;'></div>", unsafe_allow_html=True)
-if st.button("⚡ EXECUTE ML DISPATCH EVALUATION"):
-    with st.spinner("Processing dual ML model estimates..."):
+if st.button("⚡ PREDICT DELIVERY TIME"):
+    with st.spinner("Calculating predicted delivery times..."):
         try:
             # 1. Run predictions
             results = predict.predict_single_delivery(payload, save_to_db=True)
@@ -240,8 +240,8 @@ if "latest_results" in st.session_state:
     st.markdown(
         """
         <div style="margin-top: 30px; border-left: 4px solid #00f2fe; padding-left: 15px; margin-bottom: 20px;">
-            <h3 style="color: #ffffff; font-family: 'Outfit'; margin: 0;">📊 Predictive Dispatch Results HUD</h3>
-            <p style="color: #718096; font-size: 0.9rem; margin: 3px 0 0 0;">Visualizing real-time calculations and feature risk weightings.</p>
+            <h3 style="color: #f8fafc; font-family: 'Outfit'; margin: 0;">📊 Delivery Prediction Results</h3>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin: 3px 0 0 0;">Predicted time, delay risk, and factors affecting the delivery.</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -251,7 +251,7 @@ if "latest_results" in st.session_state:
     render_prediction_card(results)
     
     # 2. Display vehicle mode comparisons
-    st.markdown("#### 🏍️ Speed Mode Comparative Transit Analysis")
+    st.markdown("#### 🏍️ Compare Other Ride Types")
     modes_col1, modes_col2, modes_col3 = st.columns(3)
     eta_base = results["ETA_Minutes"]
     
@@ -268,8 +268,8 @@ if "latest_results" in st.session_state:
     st.write("---")
     
     # 3. Explainable AI waterfall
-    st.markdown("#### 🧠 Explainable AI: SHAP Prediction Breakdown")
-    st.write("This local SHAP waterfall diagram explains the exact quantity of minutes added or subtracted from standard averages.")
+    st.markdown("#### 🧠 Why the Prediction is X Minutes")
+    st.write("This chart shows how much time each detail (like traffic or distance) added or subtracted from the average delivery time.")
     
     shap_contribs = results["SHAP_Contributions"]
     base_val = results["SHAP_Base_Value"]
@@ -283,7 +283,7 @@ if "latest_results" in st.session_state:
         features_names = [features_names[i] for i in sorted_indices]
         contributions_values = [contributions_values[i] for i in sorted_indices]
         
-        bar_colors = ["#ef4444" if val > 0 else "#10b981" for val in contributions_values]
+        bar_colors = ["#ff2b54" if val > 0 else "#10b981" for val in contributions_values]
         
         fig = go.Figure(go.Bar(
             x=contributions_values,
@@ -297,34 +297,39 @@ if "latest_results" in st.session_state:
         fig.update_layout(
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
-            font_color="#a0aec0",
+            font_color="#cbd5e1",
+            font_family="'Inter', sans-serif",
             xaxis=dict(
                 title="ETA Contribution (Minutes)",
                 gridcolor="rgba(255,255,255,0.05)",
+                linecolor="rgba(255,255,255,0.1)",
                 zeroline=True,
                 zerolinecolor="rgba(255,255,255,0.2)"
             ),
-            yaxis=dict(gridcolor="rgba(255,255,255,0.05)"),
+            yaxis=dict(
+                gridcolor="rgba(255,255,255,0.05)",
+                linecolor="rgba(255,255,255,0.1)"
+            ),
             margin=dict(l=150, r=40, t=20, b=20),
             height=max(200, len(features_names) * 35)
         )
         
         st.plotly_chart(fig, use_container_width=True)
         
-        st.info(f"💡 **Interpretability Guide**: Operational baseline standard starts at **{base_val} minutes**. Combining all environmental and transit feature factors above results in the final predicted dispatch ETA of **{results['ETA_Minutes']} minutes**.")
+        st.info(f"💡 **How to read this**: A standard delivery takes about **{base_val} minutes** on average. Adding up all the details above gives the final predicted delivery time of **{results['ETA_Minutes']} minutes**.")
     else:
         st.info("SHAP contributions analysis not initialized.")
 else:
     # Warm user onboarding panel
-    st.markdown(
-        """
-        <div style="background: rgba(30, 41, 59, 0.2); border: 1px dashed rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 40px; text-align: center; margin-top: 30px;">
-            <div style="font-size: 3rem; margin-bottom: 15px;">🔮</div>
-            <h4 style="color: #ffffff; font-family: 'Outfit'; margin: 0 0 5px 0;">Awaiting Parameter Configurations</h4>
-            <p style="color: #718096; font-size: 0.95rem; max-width: 500px; margin: 0 auto;">
-                Adjust steps 1, 2, and 3 in the tab console above, then click the glow button to run machine learning predictions.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+        st.markdown(
+            """
+            <div style="background: rgba(17, 24, 39, 0.3); border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 40px; text-align: center; margin-top: 30px;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🔮</div>
+                <h4 style="color: #f8fafc; font-family: 'Outfit'; margin: 0 0 5px 0;">Waiting for Delivery Details</h4>
+                <p style="color: #94a3b8; font-size: 0.95rem; max-width: 500px; margin: 0 auto;">
+                    Fill in steps 1, 2, and 3 in the tabs above, then click the button to see the predicted delivery time.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
