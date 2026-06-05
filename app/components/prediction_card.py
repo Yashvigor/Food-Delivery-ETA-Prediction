@@ -34,8 +34,7 @@ def render_prediction_card(pred_results: dict):
         bar_color = "#ef4444"
 
     # Inline HTML for custom premium card (SaaS Dark Glassmorphism Aesthetic)
-    st.markdown(
-        f"""
+    raw_html = f"""
         <style>
             .premium-results-card {{
                 background: rgba(17, 24, 39, 0.7) !important;
@@ -175,6 +174,8 @@ def render_prediction_card(pred_results: dict):
                 </div>
             </div>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    """
+    
+    # Strip all leading/trailing whitespace from each line and remove empty lines to prevent Markdown from generating code blocks
+    cleaned_html = "\n".join([line.strip() for line in raw_html.split("\n") if line.strip() != ""])
+    st.markdown(cleaned_html, unsafe_allow_html=True)

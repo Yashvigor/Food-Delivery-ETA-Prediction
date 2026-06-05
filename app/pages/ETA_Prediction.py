@@ -86,8 +86,8 @@ with tab_geo:
 
     with geo_col2:
         st.markdown("<span style='font-size: 0.9rem; font-weight: 600; color: #f1f5f9;'>Customer Coordinate Offset</span>", unsafe_allow_html=True)
-        cust_offset_lat = st.slider("Latitude Offset (Delta)", -0.150, 0.150, 0.045, format="%.4f", key="lat_offset_slider")
-        cust_offset_lon = st.slider("Longitude Offset (Delta)", -0.150, 0.150, -0.035, format="%.4f", key="lon_offset_slider")
+        cust_offset_lat = st.slider("Latitude Offset (Delta)", -0.150, 0.150, 0.045, step=0.001, format="%.4f", key="lat_offset_slider")
+        cust_offset_lon = st.slider("Longitude Offset (Delta)", -0.150, 0.150, -0.035, step=0.001, format="%.4f", key="lon_offset_slider")
         
         cust_lat = rest_lat + cust_offset_lat
         cust_lon = rest_lon + cust_offset_lon

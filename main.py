@@ -16,7 +16,7 @@ def run_script(script_path: str, args: list = []) -> bool:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="LogiPredict: Smart Food Delivery ETA & Logistics Analytics CLI",
+        description="SwiftETA ⭐: Predict. Optimize. Deliver. CLI",
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     

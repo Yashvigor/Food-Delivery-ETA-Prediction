@@ -3,7 +3,7 @@ import streamlit as st
 
 # Must be the very first Streamlit command
 st.set_page_config(
-    page_title="LogiPredict - Operational Logistics Engine",
+    page_title="SwiftETA ⭐ - Predict. Optimize. Deliver.",
     page_icon="🛵",
     layout="wide",
     initial_sidebar_state="expanded"

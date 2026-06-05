@@ -1,8 +1,8 @@
-# ⚡ LogiPredict: Smart Food Delivery ETA & Logistics Analytics Platform
+# ⚡ SwiftETA ⭐: Predict. Optimize. Deliver.
 
-LogiPredict is an end-to-end, state-of-the-art predictive analytics and operations dispatch platform designed for modern food delivery networks. 
+SwiftETA ⭐ is an end-to-end, state-of-the-art predictive analytics and operations dispatch platform designed for modern food delivery networks. 
 
-By leveraging advanced machine learning regressions, probability classifiers, explainable AI (SHAP), live database tracking, and real-time mapping integrations, LogiPredict eliminates the "black box" of logistics estimation to boost customer satisfaction and drive fleet efficiency.
+By leveraging advanced machine learning regressions, probability classifiers, explainable AI (SHAP), live database tracking, and real-time mapping integrations, SwiftETA ⭐ eliminates the "black box" of logistics estimation to boost customer satisfaction and drive fleet efficiency.
 
 ---
 
@@ -97,7 +97,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Configure Database (Optional)
-By default, LogiPredict creates and populates a zero-config local SQLite database at `data/logistics.db`.
+By default, SwiftETA ⭐ creates and populates a zero-config local SQLite database at `data/logistics.db`.
 To connect to an enterprise PostgreSQL server, configure your `.env` file at the root directory:
 ```env
 DB_HOST=your-postgres-host
