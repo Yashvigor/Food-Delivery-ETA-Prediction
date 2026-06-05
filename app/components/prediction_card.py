@@ -11,100 +11,94 @@ def render_prediction_card(pred_results: dict):
     category = pred_results.get("Delivery_Category", "Normal")
     order_id = pred_results.get("Order_ID", "N/A")
     
-    # Theme colors based on speed category (Swiggy / Zomato Inspired)
+    # Theme colors based on speed category (Clean enterprise desaturated styles)
     if category == "Fast":
-        cat_badge_bg = "linear-gradient(135deg, #10b981 0%, #059669 100%)"
-        cat_color = "#10b981"
+        cat_badge_bg = "rgba(16, 185, 129, 0.08)"
+        cat_border = "rgba(16, 185, 129, 0.2)"
+        cat_color = "#34d399"
         cat_icon = "🚀"
     elif category == "Normal":
-        cat_badge_bg = "linear-gradient(135deg, #ff6b35 0%, #ff2b54 100%)"
-        cat_color = "#ff6b35"
+        cat_badge_bg = "rgba(99, 102, 241, 0.08)"
+        cat_border = "rgba(99, 102, 241, 0.2)"
+        cat_color = "#818cf8"
         cat_icon = "🛵"
     else:  # Delayed
-        cat_badge_bg = "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)"
-        cat_color = "#ef4444"
+        cat_badge_bg = "rgba(239, 68, 68, 0.08)"
+        cat_border = "rgba(239, 68, 68, 0.2)"
+        cat_color = "#f87171"
         cat_icon = "⚠️"
         
     # Delay probability bar color
     if delay_prob < 30:
-        bar_color = "#10b981"  # green
+        bar_color = "#34d399"  # green
     elif delay_prob < 60:
-        bar_color = "#ff9f43"  # orange
+        bar_color = "#fbbf24"  # orange
     else:
-        bar_color = "#ef4444"
+        bar_color = "#f87171"
 
     # Inline HTML for custom premium card (SaaS Dark Glassmorphism Aesthetic)
     raw_html = f"""
         <style>
             .premium-results-card {{
-                background: rgba(17, 24, 39, 0.7) !important;
-                border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                border-radius: 20px !important;
-                padding: 30px !important;
+                background: rgba(20, 27, 45, 0.4) !important;
+                border: 1px solid rgba(255, 255, 255, 0.05) !important;
+                border-left: 4px solid {cat_color} !important;
+                border-radius: 12px !important;
+                padding: 24px !important;
                 margin-top: 15px !important;
                 margin-bottom: 25px !important;
-                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3) !important;
+                box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15) !important;
                 font-family: 'Inter', sans-serif !important;
                 position: relative !important;
                 overflow: hidden !important;
-                backdrop-filter: blur(12px) !important;
-                -webkit-backdrop-filter: blur(12px) !important;
-            }}
-            .premium-results-card::before {{
-                content: '' !important;
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                height: 4px !important;
-                background: {cat_badge_bg} !important;
-                box-shadow: 0 2px 10px {cat_color} !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
             }}
             .res-eta-title {{
-                color: #94a3b8 !important;
-                font-size: 0.85rem !important;
+                color: #475569 !important;
+                font-size: 0.72rem !important;
                 text-transform: uppercase !important;
-                letter-spacing: 2px !important;
+                letter-spacing: 0.05em !important;
                 margin-bottom: 5px !important;
-                font-weight: 600 !important;
+                font-weight: 700 !important;
             }}
             .res-eta-value-container {{
                 display: flex !important;
                 align-items: baseline !important;
-                gap: 8px !important;
+                gap: 5px !important;
             }}
             .res-eta-number {{
                 font-family: 'Outfit', sans-serif !important;
-                font-size: 5.5rem !important;
+                font-size: 4.5rem !important;
                 font-weight: 800 !important;
                 line-height: 1 !important;
-                background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%) !important;
-                -webkit-background-clip: text !important;
-                -webkit-text-fill-color: transparent !important;
-                filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.05)) !important;
+                color: #f8fafc !important;
+                letter-spacing: -0.03em !important;
             }}
             .res-eta-unit {{
-                font-size: 1.8rem !important;
+                font-size: 1.35rem !important;
                 font-weight: 700 !important;
-                color: #ff6b35 !important;
+                color: {cat_color} !important;
                 font-family: 'Outfit', sans-serif !important;
             }}
             .res-metric-grid {{
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
                 gap: 20px !important;
-                margin-top: 25px !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
-                padding-top: 20px !important;
+                margin-top: 20px !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
+                padding-top: 16px !important;
             }}
             .res-metric-label {{
-                font-size: 0.85rem !important;
-                color: #94a3b8 !important;
+                font-size: 0.75rem !important;
+                color: #475569 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.03em !important;
                 margin-bottom: 4px !important;
-                font-weight: 500 !important;
+                font-weight: 700 !important;
             }}
             .res-metric-val {{
-                font-size: 1.5rem !important;
+                font-size: 1.35rem !important;
                 font-weight: 700 !important;
                 color: #f8fafc !important;
                 font-family: 'Outfit', sans-serif !important;
@@ -112,34 +106,34 @@ def render_prediction_card(pred_results: dict):
             .res-badge {{
                 display: inline-flex !important;
                 align-items: center !important;
-                gap: 6px !important;
-                padding: 6px 16px !important;
-                border-radius: 50px !important;
-                font-size: 0.85rem !important;
-                font-weight: 700 !important;
-                color: white !important;
+                gap: 5px !important;
+                padding: 4px 12px !important;
+                border-radius: 6px !important;
+                font-size: 0.75rem !important;
+                font-weight: 600 !important;
+                color: {cat_color} !important;
                 background: {cat_badge_bg} !important;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border: 1px solid {cat_border} !important;
+                align-self: flex-start !important;
             }}
             .res-meter-bg {{
-                background: rgba(255, 255, 255, 0.05) !important;
-                height: 8px !important;
-                border-radius: 4px !important;
-                margin-top: 6px !important;
+                background: rgba(255, 255, 255, 0.04) !important;
+                height: 5px !important;
+                border-radius: 3px !important;
+                margin-top: 8px !important;
                 overflow: hidden !important;
             }}
             .res-meter-fill {{
                 background: {bar_color} !important;
                 width: {delay_prob}% !important;
                 height: 100% !important;
-                border-radius: 4px !important;
-                box-shadow: 0 0 8px {bar_color} !important;
+                border-radius: 3px !important;
+                box-shadow: 0 0 6px {bar_color} !important;
             }}
         </style>
         
         <div class="premium-results-card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px;">
                 <div>
                     <div class="res-eta-title">Estimated Delivery Time</div>
                     <div class="res-eta-value-container">
@@ -153,8 +147,8 @@ def render_prediction_card(pred_results: dict):
                 </div>
             </div>
             
-            <div style="margin-top: 20px;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #94a3b8; font-weight: 500;">
+            <div style="margin-top: 15px;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #64748b; font-weight: 500;">
                     <span>Probability of Delay</span>
                     <span style="font-weight: 700; color: {bar_color};">{delay_prob}%</span>
                 </div>
@@ -166,11 +160,11 @@ def render_prediction_card(pred_results: dict):
             <div class="res-metric-grid">
                 <div>
                     <div class="res-metric-label">Prediction Confidence</div>
-                    <div class="res-metric-val" style="color: #ff6b35;">{confidence}%</div>
+                    <div class="res-metric-val" style="color: #6366f1;">{confidence}%</div>
                 </div>
                 <div>
                     <div class="res-metric-label">Order ID</div>
-                    <div class="res-metric-val" style="font-family: monospace; color: #00f2fe; font-size: 1.35rem; padding-top: 2px;">{order_id}</div>
+                    <div class="res-metric-val" style="font-family: monospace; color: #38bdf8; font-size: 1.15rem; padding-top: 2px;">{order_id}</div>
                 </div>
             </div>
         </div>

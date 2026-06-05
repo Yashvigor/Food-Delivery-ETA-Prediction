@@ -56,27 +56,26 @@ def trigger_synthetic_dispatch():
     except Exception as ex:
         st.error(f"Failed to generate synthetic dispatch: {ex}")
 
-# 1. FUTURISTIC HERO BANNER GRID
-hero_col1, hero_col2 = st.columns([1.6, 1], gap="medium")
+# 1. FUTURISTIC HERO BANNER GRID (Clean Telemetry Dashboard Console)
+hero_col1, hero_col2 = st.columns([1.8, 1.0], gap="medium")
 
 with hero_col1:
     st.markdown(
         """
-        <div style="background: linear-gradient(135deg, rgba(17, 24, 39, 0.75) 0%, rgba(10, 15, 26, 0.9) 100%); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 35px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35); min-height: 290px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+        <div style="background: rgba(15, 23, 42, 0.45); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 24px; min-height: 220px; box-shadow: 0 4px 25px rgba(0,0,0,0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <h1 style="margin: 0; background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.2rem; font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.03em;">
+                    SwiftETA ⭐
+                </h1>
                 <div class="live-indicator"><span class="live-dot"></span>Dispatcher Online</div>
             </div>
-            <h1 style="margin: 0; background: linear-gradient(135deg, #00f2fe 0%, #ff6b35 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 3.2rem; font-family: 'Outfit', sans-serif; font-weight: 900; letter-spacing: -1.5px; filter: drop-shadow(0 2px 15px rgba(0, 242, 254, 0.15));">
-                SwiftETA ⭐
-            </h1>
-            <h4 style="margin: 5px 0 15px 0; color: #ff6b35; font-family: 'Outfit', sans-serif; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.95rem;">
-                Predict. Optimize. Deliver.
-            </h4>
-            <p style="margin: 0; color: #cbd5e1; font-size: 1.0rem; line-height: 1.6; max-width: 600px;">
-                Welcome to the SwiftETA Hub. Monitor live couriers, evaluate high-precision machine learning ETA predictions, and manage system logistics dispatching in real time.
+            <p style="margin: 0 0 20px 0; color: #64748b; font-size: 0.95rem; line-height: 1.5; max-width: 580px; font-weight: 400;">
+                High-precision machine learning logistics command console. Track real-time fleet travel parameters, trigger automated dispatches, and audit residual regression distributions.
             </p>
-            <div style="margin-top: 20px; font-family: monospace; font-size: 0.8rem; color: #64748b;">
-                System Coords: 45.7725° N, 122.6801° W • SQLite HUD Persistence Active
+            <div style="display: flex; gap: 20px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 14px; font-family: monospace; font-size: 0.72rem; color: #475569;">
+                <div>SYSTEM STATUS: <span style="color: #10b981; font-weight: 600;">OPERATIONAL</span></div>
+                <div>DB ROUTING: <span style="color: #38bdf8; font-weight: 600;">SQLITE3 LOCAL</span></div>
+                <div>MODEL PERSISTENCE: <span style="color: #fbbf24; font-weight: 600;">ACTIVE</span></div>
             </div>
         </div>
         """,
@@ -91,8 +90,8 @@ with hero_col2:
     else:
         st.markdown(
             """
-            <div style="background: rgba(17, 24, 39, 0.4); border: 1px dashed rgba(255, 255, 255, 0.1); border-radius: 24px; display: flex; align-items: center; justify-content: center; height: 100%; min-height: 290px;">
-                <span style="color: #64748b; font-size: 0.9rem;">SwiftETA System Visual Asset</span>
+            <div style="background: rgba(15, 23, 42, 0.2); border: 1px dashed rgba(255, 255, 255, 0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; height: 100%; min-height: 220px;">
+                <span style="color: #475569; font-size: 0.8rem;">Visual Telemetry Unavailable</span>
             </div>
             """,
             unsafe_allow_html=True
@@ -124,15 +123,15 @@ if not df_orders.empty and 'actual_eta' in df_orders.columns:
 else:
     sla_pct = 94.2
 
-# 2. KEY STATISTICS CARDS GRID WITH NEON borders
+# 2. KEY STATISTICS CARDS GRID WITH DATADOG / STRIPE MINIMALIST AESTHETIC
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     raw_card = """
-        <div style="background: rgba(17, 24, 39, 0.55); border: 1px solid rgba(0, 242, 254, 0.15); border-radius: 18px; padding: 22px; box-shadow: 0 4px 20px rgba(0, 242, 254, 0.03); transition: all 0.3s ease;">
-            <div style="font-size: 0.78rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Total Deliveries</div>
-            <div style="font-size: 2.5rem; font-weight: 800; color: #f8fafc; font-family: 'Outfit'; margin: 5px 0; background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{total}</div>
-            <div style="font-size: 0.85rem; color: #10b981; font-weight: 600;">📈 Telemetry Active</div>
+        <div style="background: rgba(20, 27, 45, 0.4); border: 1px solid rgba(255, 255, 255, 0.04); border-left: 3px solid #6366f1; border-radius: 8px; padding: 18px 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <div style="font-size: 0.72rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Total Deliveries</div>
+            <div style="font-size: 2.1rem; font-weight: 700; color: #f8fafc; font-family: 'Outfit'; margin: 4px 0; letter-spacing: -0.02em;">{total}</div>
+            <div style="font-size: 0.75rem; color: #10b981; font-weight: 500;">&bull; Telemetry stream active</div>
         </div>
     """
     cleaned_card = "\n".join([line.strip() for line in raw_card.split("\n") if line.strip() != ""])
@@ -140,10 +139,10 @@ with col1:
 
 with col2:
     raw_card = """
-        <div style="background: rgba(17, 24, 39, 0.55); border: 1px solid rgba(255, 107, 53, 0.2); border-radius: 18px; padding: 22px; box-shadow: 0 4px 20px rgba(255, 107, 53, 0.04); transition: all 0.3s ease;">
-            <div style="font-size: 0.78rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Active Dispatches</div>
-            <div style="font-size: 2.5rem; font-weight: 800; color: #ff6b35; font-family: 'Outfit'; margin: 5px 0; background: linear-gradient(135deg, #ff9f43 0%, #ff6b35 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{active}</div>
-            <div style="font-size: 0.85rem; color: #ff8a5c; font-weight: 500;">🛵 Couriers on road</div>
+        <div style="background: rgba(20, 27, 45, 0.4); border: 1px solid rgba(255, 255, 255, 0.04); border-left: 3px solid #fbbf24; border-radius: 8px; padding: 18px 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <div style="font-size: 0.72rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Active Dispatches</div>
+            <div style="font-size: 2.1rem; font-weight: 700; color: #fbbf24; font-family: 'Outfit'; margin: 4px 0; letter-spacing: -0.02em;">{active}</div>
+            <div style="font-size: 0.75rem; color: #64748b; font-weight: 500;">&bull; Fleet currently in transit</div>
         </div>
     """
     cleaned_card = "\n".join([line.strip() for line in raw_card.split("\n") if line.strip() != ""])
@@ -151,10 +150,10 @@ with col2:
 
 with col3:
     raw_card = """
-        <div style="background: rgba(17, 24, 39, 0.55); border: 1px solid rgba(165, 180, 252, 0.15); border-radius: 18px; padding: 22px; box-shadow: 0 4px 20px rgba(165, 180, 252, 0.03); transition: all 0.3s ease;">
-            <div style="font-size: 0.78rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Avg Travel Time</div>
-            <div style="font-size: 2.5rem; font-weight: 800; color: #f8fafc; font-family: 'Outfit'; margin: 5px 0; background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{avg}m</div>
-            <div style="font-size: 0.85rem; color: #10b981; font-weight: 600;">⚡ Target standard met</div>
+        <div style="background: rgba(20, 27, 45, 0.4); border: 1px solid rgba(255, 255, 255, 0.04); border-left: 3px solid #38bdf8; border-radius: 8px; padding: 18px 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <div style="font-size: 0.72rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Avg Travel Time</div>
+            <div style="font-size: 2.1rem; font-weight: 700; color: #f8fafc; font-family: 'Outfit'; margin: 4px 0; letter-spacing: -0.02em;">{avg}m</div>
+            <div style="font-size: 0.75rem; color: #10b981; font-weight: 500;">&bull; Optimal SLA threshold</div>
         </div>
     """
     cleaned_card = "\n".join([line.strip() for line in raw_card.split("\n") if line.strip() != ""])
@@ -162,10 +161,10 @@ with col3:
 
 with col4:
     raw_card = """
-        <div style="background: rgba(17, 24, 39, 0.55); border: 1px solid rgba(255, 43, 84, 0.15); border-radius: 18px; padding: 22px; box-shadow: 0 4px 20px rgba(255, 43, 84, 0.03); transition: all 0.3s ease;">
-            <div style="font-size: 0.78rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">SLA Compliance</div>
-            <div style="font-size: 2.5rem; font-weight: 800; color: #ff2b54; font-family: 'Outfit'; margin: 5px 0; background: linear-gradient(135deg, #ff5273 0%, #ff2b54 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{sla}%</div>
-            <div style="font-size: 0.85rem; color: #ff5273; font-weight: 600;">⏱️ Under 40-min target</div>
+        <div style="background: rgba(20, 27, 45, 0.4); border: 1px solid rgba(255, 255, 255, 0.04); border-left: 3px solid #f87171; border-radius: 8px; padding: 18px 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+            <div style="font-size: 0.72rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">SLA Compliance</div>
+            <div style="font-size: 2.1rem; font-weight: 700; color: #f87171; font-family: 'Outfit'; margin: 4px 0; letter-spacing: -0.02em;">{sla}%</div>
+            <div style="font-size: 0.75rem; color: #f87171; font-weight: 500;">&bull; Standard 40m compliance</div>
         </div>
     """
     cleaned_card = "\n".join([line.strip() for line in raw_card.split("\n") if line.strip() != ""])
@@ -178,7 +177,7 @@ left_col, right_col = st.columns([2.0, 1.1], gap="medium")
 
 with left_col:
     # Flex header with simulator controls
-    stream_h1, stream_h2 = st.columns([1.5, 1], gap="small")
+    stream_h1, stream_h2 = st.columns([1.6, 1.0], gap="small")
     with stream_h1:
         st.markdown("### 📡 Live Dispatch Feed")
     with stream_h2:
@@ -224,15 +223,15 @@ with left_col:
                 <div class="timeline-card">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <div>
-                            <span style="font-family: monospace; color: #00f2fe; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px;">ORDER: {ord_id}</span>
-                            <h4 style="margin: 3px 0 0 0; color: #f8fafc; font-family: 'Outfit'; font-size: 1.15rem;">{order_name}</h4>
+                            <span style="font-family: monospace; color: #818cf8; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;">ORDER: {ord_id}</span>
+                            <h4 style="margin: 2px 0 0 0; color: #f8fafc; font-family: 'Outfit'; font-size: 1.1rem;">{order_name}</h4>
                         </div>
                         <span class="{status_class}">{status}</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: #94a3b8; margin-top: 8px;">
-                        <span>Rider: <strong style="color: #cbd5e1;">{rider_name}</strong></span>
-                        <span>Distance: <strong style="color: #cbd5e1;">{dist_val} km</strong></span>
-                        <span>Predicted ETA: <strong style="color: #ff6b35;">{eta_val} min</strong></span>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #64748b; margin-top: 8px;">
+                        <span>Rider: <strong style="color: #94a3b8;">{rider_name}</strong></span>
+                        <span>Distance: <strong style="color: #94a3b8;">{dist_val} km</strong></span>
+                        <span>Predicted ETA: <strong style="color: #818cf8;">{eta_val} min</strong></span>
                     </div>
                     <div class="timeline-bar-bg">
                         <div class="timeline-bar-fill" style="width: {progress_val}%;"></div>
@@ -271,14 +270,14 @@ with right_col:
             for idx, row in df_couriers.iterrows():
                 st.markdown(
                     f"""
-                    <div style="background: rgba(17, 24, 39, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 14px; padding: 14px 18px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                    <div style="background: rgba(20, 27, 45, 0.4); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                         <div>
-                            <span style="font-weight: 700; color: #f8fafc; font-family: 'Outfit';">{row['name']}</span>
-                            <div style="font-size: 0.8rem; color: #94a3b8;">{row['vehicle_type']} • {row['experience']} years experience</div>
+                            <span style="font-weight: 600; color: #f8fafc; font-size: 0.95rem; font-family: 'Outfit';">{row['name']}</span>
+                            <div style="font-size: 0.78rem; color: #64748b;">{row['vehicle_type']} • {row['experience']} yrs experience</div>
                         </div>
                         <div style="text-align: right;">
-                            <span style="color: #ff6b35; font-weight: 700; font-size: 0.95rem;">★ {row['rating']}</span>
-                            <div style="font-size: 0.75rem; color: #10b981; font-weight: 600;">● Available</div>
+                            <span style="color: #fbbf24; font-weight: 700; font-size: 0.88rem;">★ {row['rating']}</span>
+                            <div style="font-size: 0.7rem; color: #34d399; font-weight: 600;">● Available</div>
                         </div>
                     </div>
                     """,
@@ -291,17 +290,17 @@ with right_col:
 
 st.write("---")
 
-# Navigation Call-To-Action Cards
+# Navigation Call-To-Action Cards (Vercel-style clean card links)
 st.markdown("### 🚀 Jump Directly to Dashboards")
 act_col1, act_col2, act_col3 = st.columns(3)
 
 with act_col1:
     st.markdown(
         """
-        <div class="premium-card" style="text-align: center; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 18px; padding: 25px; transition: all 0.3s ease;">
-            <div style="font-size: 2.2rem; margin-bottom: 10px;">⚡</div>
-            <h4 style="margin: 0 0 8px 0; font-family: 'Outfit'; font-size: 1.15rem; color: #f8fafc;">Predict Travel Times</h4>
-            <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin: 0;">Predict how long a delivery will take, check if it might be late, and see what factors affected the time.</p>
+        <div class="premium-card" style="text-align: center; border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 8px; padding: 20px; transition: all 0.2s ease;">
+            <div style="font-size: 1.8rem; margin-bottom: 8px;">⚡</div>
+            <h4 style="margin: 0 0 6px 0; font-family: 'Outfit'; font-size: 1.05rem; color: #f8fafc; letter-spacing: -0.01em;">Predict Travel Times</h4>
+            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.4; margin: 0;">Predict how long a delivery will take, check if it might be late, and see what factors affected the time.</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -310,10 +309,10 @@ with act_col1:
 with act_col2:
     st.markdown(
         """
-        <div class="premium-card" style="text-align: center; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 18px; padding: 25px; transition: all 0.3s ease;">
-            <div style="font-size: 2.2rem; margin-bottom: 10px;">📈</div>
-            <h4 style="margin: 0 0 8px 0; font-family: 'Outfit'; font-size: 1.15rem; color: #f8fafc;">Delivery Reports</h4>
-            <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin: 0;">View charts for daily delivery numbers, weather delay patterns, traffic speeds, and courier performance.</p>
+        <div class="premium-card" style="text-align: center; border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 8px; padding: 20px; transition: all 0.2s ease;">
+            <div style="font-size: 1.8rem; margin-bottom: 8px;">📈</div>
+            <h4 style="margin: 0 0 6px 0; font-family: 'Outfit'; font-size: 1.05rem; color: #f8fafc; letter-spacing: -0.01em;">Delivery Reports</h4>
+            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.4; margin: 0;">View charts for daily delivery numbers, weather delay patterns, traffic speeds, and courier performance.</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -322,12 +321,11 @@ with act_col2:
 with act_col3:
     st.markdown(
         """
-        <div class="premium-card" style="text-align: center; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 18px; padding: 25px; transition: all 0.3s ease;">
-            <div style="font-size: 2.2rem; margin-bottom: 10px;">🧠</div>
-            <h4 style="margin: 0 0 8px 0; font-family: 'Outfit'; font-size: 1.15rem; color: #f8fafc;">Why Predictions Work</h4>
-            <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin: 0;">See which details (like weather or distance) affect our travel predictions the most.</p>
+        <div class="premium-card" style="text-align: center; border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 8px; padding: 20px; transition: all 0.2s ease;">
+            <div style="font-size: 1.8rem; margin-bottom: 8px;">🧠</div>
+            <h4 style="margin: 0 0 6px 0; font-family: 'Outfit'; font-size: 1.05rem; color: #f8fafc; letter-spacing: -0.01em;">Why Predictions Work</h4>
+            <p style="font-size: 0.8rem; color: #64748b; line-height: 1.4; margin: 0;">See which details (like weather or distance) affect our travel predictions the most.</p>
         </div>
         """,
         unsafe_allow_html=True
     )
-
