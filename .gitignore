@@ -11,10 +11,10 @@ data/external/traffic_data.csv
 *.db
 *.sqlite
 
-# Model binaries and weights
-models/*.pkl
-models/*.joblib
-models/*.h5
+# Allow tracking of model binaries for deployment environments
+# models/*.pkl
+# models/*.joblib
+# models/*.h5
 
 # Reports and plots
 reports/graphs/*
