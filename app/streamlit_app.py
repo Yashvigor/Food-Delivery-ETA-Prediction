@@ -3,13 +3,13 @@ import streamlit as st
 
 # Must be the very first Streamlit command
 st.set_page_config(
-    page_title="SwiftETA ⭐ - Predict. Optimize. Deliver.",
-    page_icon="🛵",
+    page_title="DeliverIQ - Predict. Optimize. Deliver.",
+    page_icon="🍔",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Centralized Premium CSS Styling System (Obsidian Dark Slate / Glassmorphic Command Aesthetic)
+# Centralized Premium CSS Styling System (DeliverIQ Orange-Red / Dark HUD Aesthetic)
 st.markdown(
     """
     <style>
@@ -31,9 +31,9 @@ st.markdown(
         
         /* Main application background layout (Dark Slate HUD) */
         .stApp {
-            background-color: #0b0f19;
+            background-color: #080c14;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.05) 0, transparent 40%), 
+                radial-gradient(at 0% 0%, rgba(244, 81, 30, 0.06) 0, transparent 40%), 
                 radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.04) 0, transparent 45%),
                 radial-gradient(at 50% 100%, rgba(15, 23, 42, 0.95) 0, transparent 60%);
             background-attachment: fixed;
@@ -48,7 +48,7 @@ st.markdown(
         
         /* Style high-contrast dashboard sidebar */
         section[data-testid="stSidebar"] {
-            background-color: #070a11 !important;
+            background-color: #05070c !important;
             border-right: 1px solid rgba(255, 255, 255, 0.03) !important;
             box-shadow: 4px 0 24px rgba(0,0,0,0.4) !important;
         }
@@ -75,8 +75,8 @@ st.markdown(
         }
         
         .stTextInput input:focus, .stNumberInput input:focus, div[data-baseweb="select"]:focus-within {
-            border-color: #6366f1 !important;
-            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15) !important;
+            border-color: #f4511e !important;
+            box-shadow: 0 0 0 2px rgba(244, 81, 30, 0.15) !important;
             outline: none !important;
         }
         
@@ -108,10 +108,10 @@ st.markdown(
         }
         
         .stTabs [aria-selected="true"] {
-            background-color: rgba(99, 102, 241, 0.1) !important;
-            color: #818cf8 !important;
+            background-color: rgba(244, 81, 30, 0.1) !important;
+            color: #ff7443 !important;
             box-shadow: none !important;
-            border: 1px solid rgba(99, 102, 241, 0.2) !important;
+            border: 1px solid rgba(244, 81, 30, 0.2) !important;
         }
         
         .stTabs [data-baseweb="tab-highlight-bar"] {
@@ -150,15 +150,15 @@ st.markdown(
         }
         
         div[role="radiogroup"] label:hover {
-            border-color: rgba(99, 102, 241, 0.4) !important;
-            background: rgba(99, 102, 241, 0.03) !important;
+            border-color: rgba(244, 81, 30, 0.4) !important;
+            background: rgba(244, 81, 30, 0.03) !important;
         }
         
         /* Highlight selected card */
         div[role="radiogroup"] label[data-baseweb="radio"]:has(input[checked]) {
-            border-color: #6366f1 !important;
-            background: rgba(99, 102, 241, 0.08) !important;
-            box-shadow: 0 0 0 1px #6366f1 !important;
+            border-color: #f4511e !important;
+            background: rgba(244, 81, 30, 0.08) !important;
+            box-shadow: 0 0 0 1px #f4511e !important;
         }
         
         /* Hide standard round radio indicator */
@@ -173,12 +173,12 @@ st.markdown(
         }
         
         div[role="radiogroup"] label[data-baseweb="radio"]:has(input[checked]) div {
-            color: #818cf8 !important;
+            color: #ff7443 !important;
         }
         
-        /* Upgraded food-delivery gradient buttons to Senior Frontend Vercel styling */
+        /* Upgraded food-delivery gradient buttons to Senior Frontend styling */
         .stButton>button {
-            background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%) !important;
+            background: linear-gradient(180deg, #ff7443 0%, #f4511e 100%) !important;
             color: #ffffff !important;
             font-family: 'Inter', sans-serif !important;
             font-weight: 600 !important;
@@ -186,14 +186,14 @@ st.markdown(
             border-radius: 8px !important;
             padding: 8px 20px !important;
             font-size: 0.88rem !important;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(99, 102, 241, 0.1) !important;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(244, 81, 30, 0.1) !important;
             transition: all 0.2s ease !important;
             width: 100% !important;
         }
         
         .stButton>button:hover {
             transform: translateY(-1px) !important;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2) !important;
+            box-shadow: 0 4px 15px rgba(244, 81, 30, 0.2) !important;
             border-color: rgba(255, 255, 255, 0.15) !important;
         }
         
@@ -207,7 +207,7 @@ st.markdown(
             height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #0b0f19;
+            background: #080c14;
         }
         ::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.08);
@@ -219,7 +219,7 @@ st.markdown(
         
         /* Premium dashboard container cards */
         .premium-card {
-            background: rgba(20, 27, 45, 0.5) !important;
+            background: rgba(18, 26, 42, 0.45) !important;
             border: 1px solid rgba(255, 255, 255, 0.05) !important;
             border-radius: 12px !important;
             padding: 20px !important;
@@ -230,8 +230,8 @@ st.markdown(
         
         .premium-card:hover {
             transform: translateY(-2px);
-            border-color: rgba(99, 102, 241, 0.25) !important;
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.04) !important;
+            border-color: rgba(244, 81, 30, 0.25) !important;
+            box-shadow: 0 8px 25px rgba(244, 81, 30, 0.04) !important;
         }
         
         /* Override Streamlit interactive dataframes */
@@ -269,7 +269,7 @@ st.markdown(
         }
         .timeline-card:hover {
             transform: translateY(-1px) !important;
-            border-color: rgba(99, 102, 241, 0.3) !important;
+            border-color: rgba(244, 81, 30, 0.3) !important;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
         }
         .status-badge {
@@ -308,8 +308,8 @@ st.markdown(
         .timeline-bar-fill {
             height: 100% !important;
             border-radius: 2px !important;
-            box-shadow: 0 0 6px rgba(99, 102, 241, 0.3) !important;
-            background: linear-gradient(90deg, #6366f1 0%, #38bdf8 100%) !important;
+            box-shadow: 0 0 6px rgba(244, 81, 30, 0.3) !important;
+            background: linear-gradient(90deg, #ff7443 0%, #f4511e 100%) !important;
         }
         .live-indicator {
             display: inline-flex !important;
@@ -342,8 +342,8 @@ pages_dir = os.path.join(os.path.dirname(__file__), "pages")
 
 home_page = st.Page(
     page=os.path.join(pages_dir, "Home.py"),
-    title="Dispatch Hub",
-    icon="🛵",
+    title="DeliverIQ Command",
+    icon="📊",
     default=True
 )
 
@@ -356,14 +356,14 @@ eta_page = st.Page(
 
 analytics_page = st.Page(
     page=os.path.join(pages_dir, "Logistics_Analytics.py"),
-    title="Fleet Insights",
+    title="Fleet Analytics",
     icon="📈",
     url_path="Logistics_Analytics"
 )
 
 insights_page = st.Page(
     page=os.path.join(pages_dir, "Model_Insights.py"),
-    title="AI Interpretability",
+    title="Model Transparency",
     icon="🧠",
     url_path="Model_Insights"
 )

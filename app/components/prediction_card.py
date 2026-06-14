@@ -18,9 +18,9 @@ def render_prediction_card(pred_results: dict):
         cat_color = "#34d399"
         cat_icon = "🚀"
     elif category == "Normal":
-        cat_badge_bg = "rgba(99, 102, 241, 0.08)"
-        cat_border = "rgba(99, 102, 241, 0.2)"
-        cat_color = "#818cf8"
+        cat_badge_bg = "rgba(244, 81, 30, 0.08)"
+        cat_border = "rgba(244, 81, 30, 0.2)"
+        cat_color = "#ff7443"
         cat_icon = "🛵"
     else:  # Delayed
         cat_badge_bg = "rgba(239, 68, 68, 0.08)"
@@ -32,7 +32,7 @@ def render_prediction_card(pred_results: dict):
     if delay_prob < 30:
         bar_color = "#34d399"  # green
     elif delay_prob < 60:
-        bar_color = "#fbbf24"  # orange
+        bar_color = "#f59e0b"  # warning amber
     else:
         bar_color = "#f87171"
 
@@ -55,7 +55,7 @@ def render_prediction_card(pred_results: dict):
                 -webkit-backdrop-filter: blur(10px) !important;
             }}
             .res-eta-title {{
-                color: #475569 !important;
+                color: #64748b !important;
                 font-size: 0.72rem !important;
                 text-transform: uppercase !important;
                 letter-spacing: 0.05em !important;
@@ -91,7 +91,7 @@ def render_prediction_card(pred_results: dict):
             }}
             .res-metric-label {{
                 font-size: 0.75rem !important;
-                color: #475569 !important;
+                color: #64748b !important;
                 text-transform: uppercase !important;
                 letter-spacing: 0.03em !important;
                 margin-bottom: 4px !important;
@@ -160,7 +160,7 @@ def render_prediction_card(pred_results: dict):
             <div class="res-metric-grid">
                 <div>
                     <div class="res-metric-label">Prediction Confidence</div>
-                    <div class="res-metric-val" style="color: #6366f1;">{confidence}%</div>
+                    <div class="res-metric-val" style="color: #ff7443;">{confidence}%</div>
                 </div>
                 <div>
                     <div class="res-metric-label">Order ID</div>

@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+scikit-learn
+xgboost
+lightgbm
+catboost
+shap
+requests
+matplotlib
+seaborn
+psycopg2-binary
